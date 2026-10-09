@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b0d12;
+  --color-panel: #12151d;
+  --color-panel2: #181c26;
+  --color-line: #252a37;
+  --color-muted: #8b93a7;
+  --color-fg: #e7eaf0;
+  --color-accent: #f59e0b;
+  --color-accent2: #fbbf24;
+  --color-up: #22c55e;
+  --color-down: #ef4444;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.prose-q h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-fg);
+}
+.prose-q h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+.prose-q p,
+.prose-q li {
+  color: #c4c9d6;
+  line-height: 1.7;
+}
+.prose-q p {
+  margin: 0.5rem 0;
+}
+.prose-q ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+.prose-q ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+.prose-q code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-panel2);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
+.prose-q strong {
+  color: var(--color-fg);
+}
+.prose-q a {
+  color: var(--color-accent2);
+  text-decoration: underline;
+}

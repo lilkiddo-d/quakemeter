@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+contracts/lcov.info
+.env
+.env.local
+*.log
+.vercel
+deployments/*.dry-run.json
+contracts/slither-report.json
+contracts/broadcast/*/31337/
+app/src/config/generated/deployments.31337.json
+deployments/31337.json
+contracts/broadcast/**/dry-run/

@@ -1,0 +1,37 @@
+{
+  "4663": {
+    "name": "Robinhood Chain",
+    "chainId": 4663,
+    "rpcUrls": ["https://rpc.mainnet.chain.robinhood.com"],
+    "explorer": "https://robinhoodchain.blockscout.com",
+    "verifier": "blockscout",
+    "verifierUrl": "https://robinhoodchain.blockscout.com/api/",
+    "gasToken": "ETH",
+    "stablecoin": {
+      "symbol": "USDG",
+      "address": "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168",
+      "decimals": 6,
+      "usdFeed": "0x61B7e5650328764B076A108EFF5fa7282a1B9aD2"
+    },
+    "weth": "0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73",
+    "sequencerUptimeFeed": "0x0000000000000000000000000000000000000000",
+    "feedMaxStaleness": 90000,
+    "basket": [
+      { "symbol": "AAPL", "token": "0xaF3D76f1834A1d425780943C99Ea8A608f8a93f9", "feed": "0x6B22A786bAa607d76728168703a39Ea9C99f2cD0" },
+      { "symbol": "AMZN", "token": "0x12f190a9F9d7D37a250758b26824B97CE941bF54", "feed": "0xD5a1508ceD74c084eBf3cBe853e2C968fB2a651C" },
+      { "symbol": "GOOGL", "token": "0x2e0847E8910a9732eB3fb1bb4b70a580ADAD4FE3", "feed": "0xF6f373a037c30F0e5010d854385cA89185AE638b" },
+      { "symbol": "META", "token": "0xc0D6457C16Cc70d6790Dd43521C899C87ce02f35", "feed": "0x7C38C00C30BEe9378381E7B6135d7283356D71b1" },
+      { "symbol": "MSFT", "token": "0xe93237C50D904957Cf27E7B1133b510C669c2e74", "feed": "0x45C3C877C15E6BA2EBB19eA114Ea508d14C1Af2E" },
+      { "symbol": "NVDA", "token": "0xd0601CE157Db5bdC3162BbaC2a2C8aF5320D9EEC", "feed": "0x379EC4f7C378F34a1B47E4F3cbeBCbAC3E8E9F15" },
+      { "symbol": "TSLA", "token": "0x322F0929c4625eD5bAd873c95208D54E1c003b2d", "feed": "0x4A1166a659A55625345e9515b32adECea5547C38" }
+    ],
+    "sources": {
+      "network": "https://docs.robinhood.com/chain/ (chain ID 4663, RPC, Blockscout explorer)",
+      "tokens": "https://docs.robinhood.com/chain/contracts (WETH, USDG; stock tokens from the on-chain asset registry served at https://api.robinhood.com/rhj/assets)",
+      "stockTokens": "https://docs.robinhood.com/chain/building-with-stock-tokens/ (ERC-20, 18 decimals, ERC-8056 multiplier)",
+      "oracles": "https://docs.robinhood.com/chain/oracles-and-price-feeds/ -> https://docs.chain.link/data-feeds/price-feeds/addresses?network=robinhood (data: https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json)",
+      "sequencerUptimeFeed": "Not listed for Robinhood Chain at https://docs.chain.link/data-feeds/l2-sequencer-feeds as of 2026-10-08; adapter supports it, set via Timelock when published"
+    },
+    "verifiedAt": "2026-10-08"
+  }
+}

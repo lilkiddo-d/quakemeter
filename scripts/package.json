@@ -1,0 +1,15 @@
+{
+  "name": "quakemeter-scripts",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Quakemeter keeper (hourly QVIX sampler) and the off-chain reference implementation of the index.",
+  "scripts": {
+    "keeper": "node keeper/keeper.ts",
+    "keeper:once": "node keeper/keeper.ts --once",
+    "test": "node --test reference/qvix.test.ts"
+  },
+  "dependencies": {
+    "viem": "^2.38.0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "quakemeter",
+  "private": true,
+  "version": "0.1.0",
+  "description": "QVIX: on-chain realized-volatility index of tokenized stocks on Robinhood Chain, with cash-settled volatility futures and variance swaps.",
+  "packageManager": "pnpm@12.9.1",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build:contracts": "cd contracts && forge build",
+    "test:contracts": "cd contracts && forge test --no-match-path \"test/fork/*\"",
+    "test:fork": "cd contracts && forge test --match-path \"test/fork/*\" -vv",
+    "coverage": "cd contracts && forge coverage --no-match-path \"test/fork/*\" --no-match-coverage \"(test|script)\" --report summary",
+    "slither": "cd contracts && slither . --config-file slither.config.json",
+    "abis": "node scripts/export-abis.mjs",
+    "app:dev": "pnpm --filter quakemeter-app dev",
+    "app:build": "pnpm --filter quakemeter-app build",
+    "keeper": "pnpm --filter quakemeter-scripts keeper",
+    "keeper:once": "pnpm --filter quakemeter-scripts keeper:once"
+  }
+}
