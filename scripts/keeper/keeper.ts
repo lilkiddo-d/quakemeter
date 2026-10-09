@@ -13,6 +13,7 @@
  *   CHAIN_ID               4663 (default) or 31337 for a local fork
  *   RPC_URL                defaults to the chain's public RPC from config/chains.json (or http://127.0.0.1:8545)
  *   KEEPER_ACCOUNT         Foundry keystore account name (default quakemeter-keeper)
+ *   KEEPER_ADDRESS         address of that keystore (forge needs it as --sender; `cast wallet address --account quakemeter-keeper`)
  *   KEEPER_PASSWORD_FILE   path to a file containing the keystore password (required for unattended runs)
  *   KEEPER_UNLOCKED_SENDER local fork only: send via anvil's unlocked account instead of a keystore
  *   INTERVAL_SECONDS       default 300 (sampling slots are hourly; 5-minute polling catches each slot early)
@@ -32,6 +33,7 @@ const rpcUrl =
   process.env.RPC_URL ?? (chainId === 31337 ? "http://127.0.0.1:8545" : chains[cfgChain]?.rpcUrls?.[0]);
 const account = process.env.KEEPER_ACCOUNT ?? "quakemeter-keeper";
 const passwordFile = process.env.KEEPER_PASSWORD_FILE;
+const keeperAddress = process.env.KEEPER_ADDRESS;
 const unlockedSender = process.env.KEEPER_UNLOCKED_SENDER;
 const intervalMs = Number(process.env.INTERVAL_SECONDS ?? 300) * 1000;
 const dryRun = process.env.DRY_RUN === "1";
@@ -63,7 +65,8 @@ function runForge(): Promise<number> {
     if (chainId !== 31337) throw new Error("KEEPER_UNLOCKED_SENDER is only allowed on a local fork");
     args.push("--unlocked", "--sender", unlockedSender);
   } else {
-    args.push("--account", account);
+    if (!keeperAddress) throw new Error("set KEEPER_ADDRESS (forge needs --sender for keystore accounts)");
+    args.push("--account", account, "--sender", keeperAddress);
     if (passwordFile) args.push("--password-file", passwordFile);
   }
   return new Promise((resolve) => {

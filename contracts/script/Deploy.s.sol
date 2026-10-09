@@ -19,6 +19,11 @@ contract Deploy is Script, ConfigReader {
         uint256 cfgChain = vm.envOr("CONFIG_CHAIN_ID", block.chainid == 31337 ? uint256(4663) : block.chainid);
         (Config memory c,) = _readConfig(cfgChain);
         address deployer = msg.sender;
+        // Foundry's placeholder sender: means --sender was not passed, so the simulation would use wrong addresses
+        require(
+            deployer != 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38,
+            "Pass --sender <your quakemeter-deployer address> (cast wallet address --account quakemeter-deployer)"
+        );
         c.guardian = vm.envOr("GUARDIAN_ADDRESS", deployer);
         c.proposer = vm.envOr("TIMELOCK_PROPOSER", deployer);
         c.treasury = vm.envOr("TREASURY_ADDRESS", address(0));

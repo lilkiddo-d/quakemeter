@@ -27,7 +27,7 @@ cast wallet import quakemeter-keeper --interactive
 ## 2. Deploy, wire, hand admin to the Timelock and verify — one command
 
 ```bash
-cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/ --slow
+cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/ --slow
 ```
 
 This deploys all contracts (Timelock, MarketClock with the 2026–2027 NYSE calendar, OracleAdapter with the 7 basket
@@ -51,7 +51,7 @@ Optional environment variables (set them **before** running; strongly recommende
 If verification fails for any contract (Blockscout rate limits), rerun only verification:
 
 ```bash
-cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --resume --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
+cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --resume --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
 ```
 
 ## 3. Later: wire the $QUAK token (only after it launches)
@@ -60,11 +60,11 @@ cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url https://rpc.ma
 [TOKEN_INTEGRATION.md](TOKEN_INTEGRATION.md)):
 
 ```bash
-cd contracts && forge script script/Ops.s.sol:SetProjectToken --sig "schedule(address)" <QUAK_TOKEN_ADDRESS> --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast
+cd contracts && forge script script/Ops.s.sol:SetProjectToken --sig "schedule(address)" <QUAK_TOKEN_ADDRESS> --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast
 ```
 
 ```bash
-cd contracts && forge script script/Ops.s.sol:SetProjectToken --sig "execute(address)" <QUAK_TOKEN_ADDRESS> --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast
+cd contracts && forge script script/Ops.s.sol:SetProjectToken --sig "execute(address)" <QUAK_TOKEN_ADDRESS> --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast
 ```
 
 Then set `NEXT_PUBLIC_PROJECT_TOKEN=<QUAK_TOKEN_ADDRESS>` on Vercel and redeploy the app.
@@ -115,11 +115,11 @@ app computes the hint) and then each position with `settlePosition(id)`.
 **Adding the next monthly expiry** (deploy now, registration via the Timelock after 48 h):
 
 ```bash
-cd contracts && forge script script/Ops.s.sol:NewExpiry --sig "deploy(uint256,uint256)" 2027 2 --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
+cd contracts && forge script script/Ops.s.sol:NewExpiry --sig "deploy(uint256,uint256)" 2027 2 --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast --verify --verifier blockscout --verifier-url https://robinhoodchain.blockscout.com/api/
 ```
 
 ```bash
-cd contracts && forge script script/Ops.s.sol:NewExpiry --sig "register(address)" <NEW_MARKET_ADDRESS> --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast
+cd contracts && forge script script/Ops.s.sol:NewExpiry --sig "register(address)" <NEW_MARKET_ADDRESS> --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast
 ```
 
 (Add the new address to `FuturesMarkets` in `deployments/4663.json` and in

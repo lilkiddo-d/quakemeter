@@ -24,7 +24,7 @@ abstract contract DeploymentReader is Script {
 }
 
 /// @title Sample — one keeper tick. Used by scripts/keeper (signs with --account quakemeter-keeper).
-///   forge script script/Ops.s.sol:Sample --rpc-url robinhood --account quakemeter-keeper --broadcast
+///   forge script script/Ops.s.sol:Sample --rpc-url robinhood --account quakemeter-keeper --sender <KEEPER_ADDRESS> --broadcast
 contract Sample is DeploymentReader {
     function run() external {
         VolIndex vi = VolIndex(_addr("VolIndex"));

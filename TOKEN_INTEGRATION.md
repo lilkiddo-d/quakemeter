@@ -29,11 +29,11 @@ the token in, exactly once.
 # 1) schedule (Timelock proposer = the deployer account unless TIMELOCK_PROPOSER was set at deploy)
 cd contracts
 forge script script/Ops.s.sol:SetProjectToken --sig "schedule(address)" <QUAK_TOKEN_ADDRESS> \
-  --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast
+  --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast
 
 # 2) at least 48 hours later
 forge script script/Ops.s.sol:SetProjectToken --sig "execute(address)" <QUAK_TOKEN_ADDRESS> \
-  --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --broadcast
+  --rpc-url https://rpc.mainnet.chain.robinhood.com --account quakemeter-deployer --sender <DEPLOYER_ADDRESS> --broadcast
 ```
 
 Then set `NEXT_PUBLIC_PROJECT_TOKEN=<QUAK_TOKEN_ADDRESS>` in the Vercel project and redeploy the frontend. The Stake
